@@ -9,16 +9,16 @@ import Editor from 'react-simple-code-editor'
 import useLocalStorageState from './hooks/useLocalStorageState'
 
 function App () {
-  const [open, setOpen] = useState(false)
-  const [code, setCode] = useLocalStorageState('', 'semscreen')
+  const [panelIsOpen, setPanelIsOpen] = useState(false)
+  const [semscreen, setSemscreen] = useLocalStorageState('', 'semscreen')
 
   return (
     <div className='App'>
       <div className='SemscreenPane'>
         <Editor
-          highlight={code => code}
-          value={code}
-          onValueChange={code => setCode(code)}
+          highlight={semscreen => semscreen}
+          value={semscreen}
+          onValueChange={semscreen => setSemscreen(semscreen)}
           padding={10}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -27,11 +27,11 @@ function App () {
         />
         <Button
           size='sm'
-          onClick={() => setOpen(!open)}
+          onClick={() => setPanelIsOpen(!panelIsOpen)}
           aria-controls='collapse-panel'
-          aria-expanded={open}
+          aria-expanded={panelIsOpen}
         >
-                    Click
+          Click
         </Button>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './App.css'
 
 import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Editor from 'react-simple-code-editor'
@@ -9,11 +10,15 @@ import Editor from 'react-simple-code-editor'
 import useLocalStorageState from './hooks/useLocalStorageState'
 
 function App () {
-  const [panelIsOpen, setPanelIsOpen] = useState(false)
+  const [showPanel, setShowPanel] = useState(false)
   const [semscreen, setSemscreen] = useLocalStorageState('', 'semscreen')
+
+  const handleShowPanel = () => setShowPanel(true)
+  const handleClosePanel = () => setShowPanel(false)
 
   return (
     <div className='App'>
+
       <div className='SemscreenPane'>
         <Editor
           highlight={semscreen => semscreen}
@@ -25,15 +30,26 @@ function App () {
             fontSize: 12
           }}
         />
-        <Button
-          size='sm'
-          onClick={() => setPanelIsOpen(!panelIsOpen)}
-          aria-controls='collapse-panel'
-          aria-expanded={panelIsOpen}
-        >
-          Click
-        </Button>
+        <Button onClick={handleShowPanel}>Click</Button>
       </div>
+
+      <div className='SemscreenListPane'>
+        <Modal size='sm' show={showPanel} onHide={handleClosePanel} dialogClassName='modal-dialog-slideout'>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant='secondary' onClick={handleClosePanel}>
+              Close
+            </Button>
+            <Button variant='primary' onClick={handleClosePanel}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+
     </div>
   )
 }

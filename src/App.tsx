@@ -39,6 +39,8 @@ function App () {
 	  className='position-absolute h-100'
           style={{ top: 0, left: 0 }}
 	  onClick={handleShowPanel}
+	  role='button'
+	  aria-label='Activate panel'
 	>
           <img src={chevronRight} alt="Chevron right" />
 	</Button>

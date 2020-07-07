@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import chevronRight from "bootstrap-icons/icons/chevron-right.svg";
+import { ReactComponent as ChevronRight } from "bootstrap-icons/icons/chevron-right.svg";
 
 import Editor from "react-simple-code-editor";
 
@@ -33,15 +33,15 @@ function App() {
           }}
         />
         <Button
-          variant="light"
+          variant="primary"
           size="sm"
-          className="position-absolute h-100"
+          className="position-absolute h-100 rounded-0"
           style={{ top: 0, left: 0 }}
           onClick={handleShowPanel}
           role="button"
           aria-label="Activate panel"
         >
-          <img src={chevronRight} alt="Chevron right" />
+          <ChevronRight width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-chevron-right" fill="currentColor" />
         </Button>
       </div>
 

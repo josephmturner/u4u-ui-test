@@ -7,13 +7,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { ReactComponent as ChevronRight } from "bootstrap-icons/icons/chevron-right.svg";
 
-import Editor from "react-simple-code-editor";
+import SemanticScreen from "semscreen-component/dist/components/SemanticScreen";
+import { messages } from "semscreen-component/dist/reducers/initialState";
+import { MessageI } from "./dataModels";
 
 import useLocalStorageState from "./hooks/useLocalStorageState";
 
 function App() {
   const [showPanel, setShowPanel] = useState(false);
-  const [semscreen, setSemscreen] = useLocalStorageState("{}", "semscreen");
+  const [message, setMessage] = useLocalStorageState(messages[0], "message");
 
   const handleShowPanel = () => setShowPanel(true);
   const handleClosePanel = () => setShowPanel(false);
@@ -21,15 +23,10 @@ function App() {
   return (
     <div className="App">
       <div className="SemscreenPane position-relative">
-        <Editor
-          highlight={(semscreen) => semscreen}
-          value={semscreen}
-          onValueChange={(semscreen) => setSemscreen(semscreen)}
-          padding={10}
-          style={{
-            fontFamily: '"Fira code", "Fira Mono", monospace',
-            fontSize: 12,
-            marginLeft: "2rem",
+        <SemanticScreen
+          message={message}
+          onMessageChange={(m: MessageI) => {
+            setMessage(m);
           }}
         />
         <Button
@@ -41,7 +38,13 @@ function App() {
           role="button"
           aria-label="Activate panel"
         >
-          <ChevronRight width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-chevron-right" fill="currentColor" />
+          <ChevronRight
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            className="bi bi-chevron-right"
+            fill="currentColor"
+          />
         </Button>
       </div>
 

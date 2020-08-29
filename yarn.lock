@@ -9776,9 +9776,9 @@ selfsigned@^1.10.7:
   dependencies:
     node-forge "0.9.0"
 
-semscreen-component@hiimalexjgarcia/semscreen-component#master:
+semscreen-component@ushin-inc/semscreen-component#master:
   version "0.1.0"
-  resolved "https://codeload.github.com/hiimalexjgarcia/semscreen-component/tar.gz/617c0794230293d894b12878478edbd3ba4d28d2"
+  resolved "https://codeload.github.com/ushin-inc/semscreen-component/tar.gz/cb22803b97e03657fce4b883673c574d0755e65b"
   dependencies:
     "@testing-library/jest-dom" "^4.2.4"
     "@testing-library/react" "^9.3.2"

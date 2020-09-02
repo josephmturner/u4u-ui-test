@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import styled from "styled-components";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -7,43 +8,43 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { ReactComponent as ChevronRight } from "bootstrap-icons/icons/chevron-right.svg";
 
-import Editor from "react-simple-code-editor";
+import SemanticScreen from "semscreen-component/dist/components/SemanticScreen";
+import { messages } from "semscreen-component/dist/reducers/initialState";
+import { MessageI } from "./dataModels";
 
 import useLocalStorageState from "./hooks/useLocalStorageState";
 
 function App() {
-  const [showPanel, setShowPanel] = useState(false);
-  const [semscreen, setSemscreen] = useLocalStorageState("{}", "semscreen");
+  const [message, setMessage] = useLocalStorageState(messages[0], "message");
 
+  const [showPanel, setShowPanel] = useState(false);
   const handleShowPanel = () => setShowPanel(true);
   const handleClosePanel = () => setShowPanel(false);
 
   return (
-    <div className="App">
-      <div className="SemscreenPane position-relative">
-        <Editor
-          highlight={(semscreen) => semscreen}
-          value={semscreen}
-          onValueChange={(semscreen) => setSemscreen(semscreen)}
-          padding={10}
-          style={{
-            fontFamily: '"Fira code", "Fira Mono", monospace',
-            fontSize: 12,
-            marginLeft: "2rem",
-          }}
-        />
-        <Button
-          variant="primary"
-          size="sm"
-          className="position-absolute h-100 rounded-0"
-          style={{ top: 0, left: 0 }}
+    <>
+      <SemscreenPane>
+        <button
+          style={{ backgroundColor: "white" }}
           onClick={handleShowPanel}
           role="button"
           aria-label="Activate panel"
         >
-          <ChevronRight width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-chevron-right" fill="currentColor" />
-        </Button>
-      </div>
+          <ChevronRight
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            className="bi bi-chevron-right"
+            fill="#000"
+          />
+        </button>
+        <SemanticScreen
+          message={message}
+          onMessageChange={(m: MessageI) => {
+            setMessage(m);
+          }}
+        />
+      </SemscreenPane>
 
       <div className="SemscreenListPane">
         <Modal
@@ -70,8 +71,13 @@ function App() {
           </Modal.Footer>
         </Modal>
       </div>
-    </div>
+    </>
   );
 }
+
+const SemscreenPane = styled.div`
+  display: flex;
+  height: 100%;
+`;
 
 export default App;

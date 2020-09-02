@@ -8,8 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { ReactComponent as ChevronRight } from "bootstrap-icons/icons/chevron-right.svg";
 
-import SemanticScreen from "semscreen-component/dist/components/SemanticScreen";
-import { messages } from "semscreen-component/dist/reducers/initialState";
+import SemanticScreen from "ushin-ui-components/dist/components/SemanticScreen";
+import { messages } from "ushin-ui-components/dist/reducers/initialState";
 import { MessageI } from "./dataModels";
 
 import useLocalStorageState from "./hooks/useLocalStorageState";

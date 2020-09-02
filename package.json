@@ -16,7 +16,7 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "semscreen-component": "ushin-inc/semscreen-component#master",
+    "ushin-ui-components": "ushin-inc/ushin-ui-components#master",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2"
   },
@@ -42,7 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "redux-devtools-extension": "^2.13.8"
-  }
+  "devDependencies": {}
 }

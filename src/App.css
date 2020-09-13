@@ -1,11 +1,11 @@
 .modal-dialog-slideout {
   min-height: 100%;
-  margin: 0 !important;
+  margin: 0 0 0 auto !important;
   background: #fff;
 }
 
 .modal.fade .modal-dialog.modal-dialog-slideout {
-  transform: translate(-100%, 0);
+  transform: translate(100%, 0);
 }
 
 .modal.fade.show .modal-dialog.modal-dialog-slideout {

@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import SidePanel from "./SidePanel";
+
 import { ReactComponent as ChevronLeft } from "bootstrap-icons/icons/chevron-left.svg";
 
 import SemanticScreen from "ushin-ui-components/dist/components/SemanticScreen";
@@ -50,29 +52,7 @@ function App() {
         />
       </div>
 
-      <Modal
-        size="sm"
-        show={showPanel}
-        onHide={handleClosePanel}
-        dialogClassName="modal-dialog-slideout"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Screens</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <ul>
-            <li>Mine</li>
-          </ul>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClosePanel}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClosePanel}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+   {showPanel && <SidePanel />}
     </>
   );
 }

@@ -1,2 +1,2 @@
 declare module "ushin-ui-components/dist/components/SemanticScreen";
-declare module "ushin-ui-components/dist/reducers/initialState";
+declare module "ushin-ui-components/dist/constants/initialState";

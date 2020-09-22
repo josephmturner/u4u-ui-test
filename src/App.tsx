@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ReactComponent as ChevronLeft } from "bootstrap-icons/icons/chevron-left.svg";
 
 import SemanticScreen from "ushin-ui-components/dist/components/SemanticScreen";
-import { messages } from "ushin-ui-components/dist/reducers/initialState";
+import { messages } from "ushin-ui-components/dist/constants/initialState";
 import { MessageI } from "./dataModels";
 
 import useLocalStorageState from "./hooks/useLocalStorageState";

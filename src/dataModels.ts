@@ -48,7 +48,7 @@ export interface AuthorI {
 export interface PointI {
   quotedAuthor?: AuthorI;
   content: string;
-  pointId: string;
+  _id: string;
   pointDate: Date;
 }
 
@@ -63,11 +63,11 @@ export type PointsI = {
 };
 
 export interface MessageI {
-  messageId: string;
+  _id: string;
   revisionOf?: string;
   author: AuthorI;
   points: PointsI;
-  focus?: { pointId: string; shape: PointShape };
+  focus?: { _id: string; shape: PointShape };
   main?: string;
   createdAt: Date;
 }

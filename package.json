@@ -7,15 +7,18 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
+    "@types/level-js": "^4.0.1",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "level-js": "^5.0.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
+    "ushin-db": "ushin-inc/ushin-db#master",
     "ushin-ui-components": "ushin-inc/ushin-ui-components#master"
   },
   "scripts": {

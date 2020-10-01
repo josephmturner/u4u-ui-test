@@ -16,9 +16,15 @@
   You should have received a copy of the GNU General Public License
   along with U4U.  If not, see <https://www.gnu.org/licenses/>.
 */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 
 import SemanticScreen from "ushin-ui-components/dist/components/SemanticScreen";
+
+import leveljs from "level-js";
+import { USHINBase } from "ushin-db";
+
+import styled from "styled-components";
 
 import RightPanel from "./components/RightPanel";
 import OpenPanelButton from "./components/OpenPanelButton";
@@ -30,11 +36,45 @@ import usePanel, { PanelState } from "./hooks/usePanel";
 import { messages } from "./initialState";
 import { MessageI } from "./dataModels";
 
-import styled from "styled-components";
+//TODO: need type definitions for db
+const searchAllMessages = async (db: any) => {
+  try {
+    const all = await db.searchMessages();
+    return all;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const addMessage = async (db: any, message: MessageI) => {
+  console.log('added');
+  try {
+    if (typeof message.main !== "string") {
+      throw new Error("message is a missing main point");
+    } else if (!message.focus) {
+      throw new Error("message is missing a focus point");
+    }
+    const id = await db.addMessage(message);
+    return id;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const App = () => {
+  const leveldown = leveljs;
+  const authorURL = "hyper://example";
+  const [db, setDb] = useState(null);
+  useEffect(() => {
+    (async () => {
+      const _db = new USHINBase({ leveldown, authorURL });
+      await _db.init();
+      setDb(_db);
+    })();
+  }, [leveldown, authorURL]);
+
   const readOnly = false;
-  const darkMode = true;
+  const darkMode = false;
 
   const author = { name: "KindWoman", color: "#7d3989" };
 
@@ -49,6 +89,21 @@ const App = () => {
   };
 
   const [panelState, panelDispatch] = usePanel();
+
+  //TODO: fix types from messageList when ushin-db returns correctly
+  //formatted dates - see github issue
+  const [messageList, setMessageList] = useState<any[]>([]);
+
+  //TODO: What is the best way to get the list of message mans points?
+  //db.searchMessages doesn't seem to return objects with main or focus attributes
+  useEffect(() => {
+    const updateList = async () => {
+      const msgs = await searchAllMessages(db);
+      setMessageList(msgs);
+    };
+    updateList();
+    //TODO: if db is included in deps array, this effect loops
+  }, [db, panelState]);
 
   return (
     <AppStyles darkMode={darkMode}>
@@ -73,7 +128,7 @@ const App = () => {
       )}
       {panelState.right && (
         <RightPanelContainer darkMode={darkMode}>
-          <RightPanel author={author} darkMode={darkMode} />
+         <RightPanel author={author} addMessage={() => addMessage(db, message)} messageList={messageList} darkMode={darkMode} />
           <ClosePanelButton
             side={"right"}
             onClick={() => panelDispatch({ panel: "right", show: false })}

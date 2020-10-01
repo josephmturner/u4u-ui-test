@@ -19,9 +19,11 @@
 import React from "react";
 import styled from "styled-components";
 import Banner from "ushin-ui-components/dist/components/Banner";
+import MessageList from "./MessageList";
 import { AuthorI } from "../dataModels";
 
-const RightPanel = (props: { author: AuthorI; darkMode: boolean }) => (
+const RightPanel = (props: { author: AuthorI; addMessage: () => void; messageList: any; darkMode: boolean }) => (
+ <>
   <TopPortion>
     <svg
       width="2em"
@@ -40,6 +42,11 @@ const RightPanel = (props: { author: AuthorI; darkMode: boolean }) => (
       darkMode={props.darkMode}
     />
   </TopPortion>
+  <div>
+   <button onClick={props.addMessage}>save</button>
+   <MessageList messageList={props.messageList} />
+  </div>
+ </>
 );
 
 const TopPortion = styled.div`

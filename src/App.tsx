@@ -16,10 +16,11 @@
   You should have received a copy of the GNU General Public License
   along with U4U.  If not, see <https://www.gnu.org/licenses/>.
 */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import SemanticScreen from "ushin-ui-components/dist/components/SemanticScreen";
 
+import RightPanel from "./components/RightPanel";
 import OpenPanelButton from "./components/OpenPanelButton";
 import ClosePanelButton from "./components/ClosePanelButton";
 import ParkingSpace from "./components/ParkingSpace";
@@ -46,9 +47,6 @@ const App = () => {
   const onChangeSelectedPointIds = (selectedPointIds: string[]) => {
     setSelectedPointIds(selectedPointIds);
   };
-  useEffect(() => {
-    console.log(selectedPointIds);
-  }, [selectedPointIds]);
 
   const [panelState, panelDispatch] = usePanel();
 
@@ -74,14 +72,14 @@ const App = () => {
         />
       )}
       {panelState.right && (
-        <RightPanel>
-          <ParkingSpace darkMode={darkMode} />
+        <RightPanelContainer darkMode={darkMode}>
+          <RightPanel author={author} darkMode={darkMode} />
           <ClosePanelButton
             side={"right"}
             onClick={() => panelDispatch({ panel: "right", show: false })}
             darkMode={darkMode}
           />
-        </RightPanel>
+        </RightPanelContainer>
       )}
       {!panelState.bottom && (
         <OpenPanelButton
@@ -93,14 +91,14 @@ const App = () => {
         />
       )}
       {panelState.bottom && (
-        <BottomPanel>
-          <ParkingSpace darkMode={darkMode} />
+        <BottomPanelContainer darkMode={darkMode}>
+          <ParkingSpace />
           <ClosePanelButton
             side={"bottom"}
             onClick={() => panelDispatch({ panel: "bottom", show: false })}
             darkMode={darkMode}
           />
-        </BottomPanel>
+        </BottomPanelContainer>
       )}
     </AppStyles>
   );
@@ -138,18 +136,24 @@ const SemscreenPanel = styled.div<PanelState>`
   width: ${(props) => (props.right ? "calc(100% - 16rem)" : "100%")};
 `;
 
-const RightPanel = styled.div`
+interface ContainerProps {
+  darkMode: boolean;
+}
+
+const RightPanelContainer = styled.div<ContainerProps>`
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
   width: 16rem;
+  background-color: ${(props) => (props.darkMode ? "black" : "white")};
 `;
 
-const BottomPanel = styled.div`
+const BottomPanelContainer = styled.div<ContainerProps>`
   position: absolute;
   height: 4rem;
   width: 100%;
+  background-color: black;
 `;
 
 export default App;
